@@ -18,7 +18,7 @@ class _CompanyPageState extends State<CompanyPage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<MainBloc>(context).add(GetJobsEvent());
+    BlocProvider.of<MainBloc>(context).add(GetJobsCompaniesEvent());
   }
 
   @override

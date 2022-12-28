@@ -8,20 +8,24 @@ import 'package:jobser/presentation/pages/add_company.dart';
 import 'package:jobser/presentation/pages/company.dart';
 
 class Companies extends StatefulWidget {
-  const Companies({super.key, required this.companiesList});
+  const Companies({super.key, this.companiesList});
 
-  final List<CompanyLocalModel> companiesList;
+  final List<CompanyLocalModel>? companiesList;
 
   @override
   State<Companies> createState() => _CompaniesState();
 }
 
 class _CompaniesState extends State<Companies> {
-
+  List<CompanyLocalModel> companiesList = [];
   @override
   Widget build(BuildContext context) {
-    List<CompanyLocalModel> companiesList = widget.companiesList;
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
+    if (widget.companiesList.runtimeType != Null) {
+      companiesList = widget.companiesList!;
+    } else {
+      companiesList = mainBloc.appManagement.getSavedCompanies();
+    }
     return Scaffold(
       appBar: AppBar(
         title: const Text('Companies'),
@@ -31,6 +35,9 @@ class _CompaniesState extends State<Companies> {
           BlocConsumer<MainBloc, ListState>(
             listener: (context, state) {
               if (state is UpdateCompaniesState) {
+                companiesList = state.companies;
+              }
+              if (state is UpdateJobsCompaniesState) {
                 companiesList = state.companies;
               }
             },
@@ -72,9 +79,6 @@ class _CompaniesState extends State<Companies> {
                                 mainAxisSize: MainAxisSize.min,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  Text(
-                                    'ID: ${company.companyID}',
-                                  ),
                                   Text(
                                     'Name: ${company.name},',
                                   ),

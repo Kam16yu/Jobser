@@ -5,10 +5,10 @@ abstract class ListState {}
 
 class ListInitState extends ListState {}
 
-class UpdateJobsState implements ListState {
+class UpdateJobsCompaniesState implements ListState {
   final List<JobLocalModel> jobs;
   final List<CompanyLocalModel> companies;
-  UpdateJobsState(this.jobs, this.companies);
+  UpdateJobsCompaniesState(this.jobs, this.companies);
 }
 
 class UpdateCompaniesState implements ListState {

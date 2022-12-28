@@ -19,13 +19,11 @@ class JobsPage extends StatefulWidget {
 class _JobsPageState extends State<JobsPage> {
   List<JobLocalModel> jobsList = [];
   List<CompanyLocalModel> companiesList = [];
-  String companyName = '';
 
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<MainBloc>(context).add(GetJobsEvent());
-    BlocProvider.of<MainBloc>(context).add(GetCompaniesEvent());
+    BlocProvider.of<MainBloc>(context).add(GetJobsCompaniesEvent());
   }
 
   @override
@@ -64,7 +62,7 @@ class _JobsPageState extends State<JobsPage> {
         children: [
           BlocConsumer<MainBloc, ListState>(
             listener: (context, state) {
-              if (state is UpdateJobsState) {
+              if (state is UpdateJobsCompaniesState) {
                 jobsList = state.jobs;
                 companiesList = state.companies;
               }
@@ -74,6 +72,7 @@ class _JobsPageState extends State<JobsPage> {
                 child: ListView.builder(
                   itemCount: jobsList.length,
                   itemBuilder: (context, index) {
+                    String companyName = '';
                     final JobLocalModel job = jobsList[index];
                     final Iterable<CompanyLocalModel> companies = companiesList
                         .where((e) => e.companyID == job.companyID);
@@ -147,7 +146,7 @@ class _JobsPageState extends State<JobsPage> {
                       icon: const Icon(Icons.restart_alt_rounded),
                       iconSize: 40.0,
                       onPressed: () {
-                        mainBloc.add(GetJobsEvent());
+                        mainBloc.add(GetJobsCompaniesEvent());
                       },
                       tooltip: 'Update jobs',
                     ),

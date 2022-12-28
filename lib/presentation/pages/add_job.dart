@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
+import 'package:jobser/presentation/pages/jobs_page.dart';
 
 class AddJobPage extends StatefulWidget {
   const AddJobPage({super.key, required this.companiesList});
@@ -55,6 +56,15 @@ class _AddJobPageState extends State<AddJobPage> {
                   ),
                 ),
               );
+              mainBloc.add(GetJobsCompaniesEvent());
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (BuildContext context) => BlocProvider.value(
+                    value: mainBloc,
+                    child: const JobsPage(),
+                  ),
+                ),
+              );
             },
             child: const Text("Save"),
           )
@@ -84,7 +94,9 @@ class _AddJobPageState extends State<AddJobPage> {
                         border: OutlineInputBorder(),
                         hintText: 'Title',
                       ),
-                      onChanged: (val) => setState(() {title = val;}),
+                      onChanged: (val) => setState(() {
+                        title = val;
+                      }),
                     ),
                   ),
                   Padding(
@@ -96,7 +108,9 @@ class _AddJobPageState extends State<AddJobPage> {
                         border: OutlineInputBorder(),
                         hintText: 'Description',
                       ),
-                      onChanged: (val) => setState(() {description = val;}),
+                      onChanged: (val) => setState(() {
+                        description = val;
+                      }),
                     ),
                   ),
                   Padding(
@@ -108,7 +122,9 @@ class _AddJobPageState extends State<AddJobPage> {
                         border: OutlineInputBorder(),
                         hintText: 'City',
                       ),
-                      onChanged: (val) => setState(() {city = val;}),
+                      onChanged: (val) => setState(() {
+                        city = val;
+                      }),
                     ),
                   ),
                   DropdownButton<String>(

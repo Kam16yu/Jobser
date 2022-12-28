@@ -182,7 +182,7 @@ class DbAndRemoteOperations implements SourcesRepository {
     if (remoteId == -1) {
       companiesBox.delete(localId);
 
-      return 200;
+      return 100;
     }
     //Delete company, from remote layer int id 1..2..  - ok, -1 - failed
     final result = await client.deleteCompany(remoteId);

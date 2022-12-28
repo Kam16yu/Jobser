@@ -5,8 +5,8 @@ abstract class ListEvent {}
 
 class ListInitEvent extends ListEvent {}
 
-class GetJobsEvent extends ListEvent {
-  GetJobsEvent();
+class GetJobsCompaniesEvent extends ListEvent {
+  GetJobsCompaniesEvent();
 }
 
 class AddJobEvent extends ListEvent {
