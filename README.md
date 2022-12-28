@@ -6,7 +6,7 @@ Flutter application to view and add vacancies and employer companies. With the i
 ![image](https://user-images.githubusercontent.com/91286611/209831066-b4bb24e7-95d5-451d-adc1-f9134f2c4e7d.png)
 
 # Companies page
-![image](https://user-images.githubusercontent.com/91286611/209831144-c9d79e0e-48e3-43f6-a43a-1c88cc58b3c7.png)
+![image](https://user-images.githubusercontent.com/91286611/209833559-70b27674-2483-4566-baaf-4aaf61515bd2.png)
 
 # Selected company page
 ![image](https://user-images.githubusercontent.com/91286611/209831351-4e425d0c-8bf2-49de-a18d-163647b24247.png)
