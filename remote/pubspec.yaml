@@ -11,12 +11,11 @@ dependencies:
   data:
     path: ../data
   dio: ^4.0.6
-  domain:
-    path: ../domain
   flutter:
     sdk: flutter
   injector: ^2.0.0
-
+  domain:
+    path: ../domain
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -27,7 +26,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  # The following line ensures that the Material Icons font is
+  # included with your application, so that you can use the icons in
+  # the material Icons class.
+  uses-material-design: true
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

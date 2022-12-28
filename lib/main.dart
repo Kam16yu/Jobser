@@ -1,11 +1,16 @@
+import 'package:data/core/sources_operations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injector/injector.dart';
+import 'package:jobser/inject_init.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/pages/jobs_page.dart';
 
 void main() async {
   // Ensure that plugin services are initialized
   WidgetsFlutterBinding.ensureInitialized();
+  await initDataLayer();
+  await InstancesInject().setup();
   runApp(const MyApp());
 }
 
@@ -16,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Job checker',
+      title: 'Jobser',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
@@ -41,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       //Implementing Bloc in app
       body: BlocProvider(
-        create: (context) => MainBloc(),
+        create: (context) => Injector.appInstance.get<MainBloc>(),
         child: const JobsPage(),
       ),
     );

@@ -1,10 +1,11 @@
-import 'package:domain/entities/job_model.dart';
+import 'package:domain/models/job_local_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
 import 'package:jobser/presentation/bloc/states.dart';
 import 'package:jobser/presentation/pages/companies_page.dart';
+import 'package:jobser/presentation/pages/job.dart';
 
 class JobsPage extends StatefulWidget {
   const JobsPage({super.key});
@@ -14,7 +15,7 @@ class JobsPage extends StatefulWidget {
 }
 
 class _JobsPageState extends State<JobsPage> {
-  List<JobModel> dataList = [];
+  List<JobLocalModel> jobsList = [];
 
   @override
   void initState() {
@@ -30,39 +31,77 @@ class _JobsPageState extends State<JobsPage> {
       children: [
         BlocConsumer<MainBloc, ListState>(
           listener: (context, state) {
-            if (state is UpdateJobState) {
-              dataList = state.jobs;
+            if (state is UpdateJobsState) {
+              jobsList = state.jobs;
             }
           },
           builder: (context, state) {
             return Expanded(
               child: ListView.builder(
-                itemCount: dataList.length,
+                itemCount: jobsList.length,
                 itemBuilder: (context, index) {
-                  final JobModel job = dataList[index];
+                  final JobLocalModel job = jobsList[index];
 
-                  return Card(
-                    elevation: 5,
-                    shape: RoundedRectangleBorder(
-                      side: BorderSide(
-                        color: Theme.of(context).colorScheme.outline,
+                  return InkWell(
+                    splashColor: Colors.blue.withAlpha(30),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => BlocProvider.value(
+                            value: mainBloc,
+                            child: JobPage(jobModel: job),
+                          ),
+                        ),
+                      );
+                    },
+                    //CARD BODY
+                    child: Card(
+                      elevation: 5,
+                      shape: RoundedRectangleBorder(
+                        side: BorderSide(
+                          color: Theme.of(context).colorScheme.outline,
+                        ),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(12)),
                       ),
-                      borderRadius: const BorderRadius.all(Radius.circular(12)),
-                    ),
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          ' JobID: ${job.jobID}',
-                        ),
-                        Text(
-                          ' CompanyID: ${job.companyID}',
-                        ),
-                        Text(' Job title: ${job.title}'),
-                        Text(' Description: ${job.description}'),
-                        Text(' City: ${job.city}'),
-                      ],
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: <Widget>[
+                                Text(
+                                  ' JobID: ${job.jobID}',
+                                ),
+                                Text(
+                                  ' CompanyID: ${job.companyID}',
+                                ),
+                                Text(' Job title: ${job.title}'),
+                                Text(' Description: ${job.description}'),
+                                Text(' City: ${job.city}'),
+                              ],
+                            ),
+                          ),
+                          IconButton(
+                            padding: const EdgeInsets.fromLTRB(
+                              8.0,
+                              8.0,
+                              20.0,
+                              8.0,
+                            ),
+                            icon: const Icon(Icons.delete),
+                            onPressed: () async {
+                              mainBloc.add(
+                                DeleteJobEvent(
+                                  job.jobLocalID,
+                                  job.jobID,
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -78,16 +117,14 @@ class _JobsPageState extends State<JobsPage> {
             children: [
               Row(
                 children: [
-                  const Text(" Background:", style: TextStyle(fontSize: 25)),
                   IconButton(
                     padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
                     icon: const Icon(Icons.restart_alt_sharp),
                     iconSize: 40.0,
                     onPressed: () {
-                      BlocProvider.of<MainBloc>(context)
-                          .add(GetCompaniesJobsEvent());
+                      mainBloc.add(GetJobsEvent());
                     },
-                    tooltip: 'Restart background process',
+                    tooltip: 'Update jobs',
                   ),
                   IconButton(
                     padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
@@ -100,7 +137,7 @@ class _JobsPageState extends State<JobsPage> {
               ),
               IconButton(
                 padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
-                icon: const Icon(Icons.cloud),
+                icon: const Icon(Icons.add_business),
                 iconSize: 40.0,
                 onPressed: () {
                   Navigator.of(context).push(
@@ -112,15 +149,14 @@ class _JobsPageState extends State<JobsPage> {
                     ),
                   );
                 },
-                tooltip: 'Cloud Archive',
+                tooltip: 'Companies',
               ),
               IconButton(
                 padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
                 icon: const Icon(Icons.add_box_rounded),
                 iconSize: 40.0,
-                onPressed: () {
-                },
-                tooltip: 'Check State',
+                onPressed: () {},
+                tooltip: 'Add Job',
               ),
             ],
           ),

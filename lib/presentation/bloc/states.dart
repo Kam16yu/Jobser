@@ -1,18 +1,24 @@
-import 'package:domain/entities/company_model.dart';
-import 'package:domain/entities/job_model.dart';
+import 'package:domain/models/company_local_model.dart';
+import 'package:domain/models/job_local_model.dart';
 
 abstract class ListState {}
 
 class ListInitState extends ListState {}
 
-class UpdateJobState implements ListState {
-  final List<JobModel> jobs;
+class UpdateJobsState implements ListState {
+  final List<JobLocalModel> jobs;
 
-  UpdateJobState(this.jobs);
+  UpdateJobsState(this.jobs);
 }
 
-class UpdateCompanyState implements ListState {
-  final List<CompanyModel> companies;
+class UpdateCompaniesState implements ListState {
+  final List<CompanyLocalModel> companies;
 
-  UpdateCompanyState(this.companies);
+  UpdateCompaniesState(this.companies);
+}
+
+class UpdateCompaniesJobState implements ListState {
+  final List<JobLocalModel> jobs;
+
+  UpdateCompaniesJobState(this.jobs);
 }

@@ -32,19 +32,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   data:
     path: data
-  dio: ^4.0.6
   domain:
     path: domain
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.1
-  hive: ^2.2.3
-  hive_flutter: ^1.1.0
   injector: ^2.0.0
   remote:
     path: remote
-  sqflite: ^2.2.2
-
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
 

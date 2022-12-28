@@ -1,5 +1,4 @@
-export 'package:domain/entities/company_model.dart';
-export 'package:domain/entities/job_model.dart';
-export 'package:domain/entities/constants.dart';
-export 'package:domain/repository/vacancies_repo.dart';
-export 'package:domain/use_cases/remote_server.dart';
+export 'package:domain/models/company_local_model.dart';
+export 'package:domain/models/job_local_model.dart';
+export 'package:domain/repository/vacancies_repository.dart';
+export 'package:domain/use_cases/app_management.dart';

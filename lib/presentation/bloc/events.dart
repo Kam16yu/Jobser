@@ -1,5 +1,5 @@
-import 'package:domain/entities/company_model.dart';
-import 'package:domain/entities/job_model.dart';
+import 'package:domain/models/company_local_model.dart';
+import 'package:domain/models/job_local_model.dart';
 
 abstract class ListEvent {}
 
@@ -9,20 +9,33 @@ class GetJobsEvent extends ListEvent {
   GetJobsEvent();
 }
 
-class PostJobEvent extends ListEvent {
-  final JobModel job;
+class AddJobEvent extends ListEvent {
+  final JobLocalModel job;
 
-  PostJobEvent(this.job);
+  AddJobEvent(this.job);
 }
 
 class GetCompaniesEvent extends ListEvent {
 }
 
-class PostCompaniesEvent extends ListEvent {
-  final CompanyModel company;
-  PostCompaniesEvent(this.company);
+class AddCompanyEvent extends ListEvent {
+  final CompanyLocalModel company;
+  AddCompanyEvent(this.company);
 }
 
 class GetCompaniesJobsEvent extends ListEvent {
-  GetCompaniesJobsEvent();
+  final int remoteId;
+  GetCompaniesJobsEvent(this.remoteId);
+}
+
+class DeleteCompanyEvent extends ListEvent {
+  final  int localId;
+  final  int remoteId;
+  DeleteCompanyEvent(this.localId, this.remoteId);
+}
+
+class DeleteJobEvent extends ListEvent {
+  final  int localId;
+  final  int remoteId;
+  DeleteJobEvent(this.localId, this.remoteId);
 }

@@ -1,19 +1,22 @@
-import 'package:domain/entities/company_model.dart';
-import 'package:domain/entities/job_model.dart';
+import 'package:domain/models/company_local_model.dart';
+import 'package:domain/models/job_local_model.dart';
+import 'package:remote/models/company_model.dart';
+import 'package:remote/models/job_model.dart';
 
-abstract class RemoteRepository {
-  Future<List<JobModel>> getJobs(String request);
 
-  Future<String> addJob(String request, JobModel job);
+abstract class RemoteOperations {
+  Future<List<JobRemoteModel>> getJobs({String request});//List<JobModel>>
 
-  Future<String> deleteJob(String request, int id);
+  Future<int> addJob(JobLocalModel job, {String request});
 
-  Future<List<CompanyModel>> getCompanies(String request);
+  Future<int> deleteJob(int id, {String request});
 
-  Future<String> addCompany(String request, CompanyModel company);
+  Future<List<CompanyRemoteModel>> getCompanies({String request});//List<CompanyModel>
 
-  Future<List<JobModel>> getCompanyJobs(String request, int id);
+  Future<int> addCompany(CompanyLocalModel company, {String request});
 
-  Future<String> deleteCompany(String request, int id);
+  Future<List<JobRemoteModel>> getCompanyJobs(int id, {String request});//List<JobModel>>
+
+  Future<int> deleteCompany(int id, {String request});
 
 }

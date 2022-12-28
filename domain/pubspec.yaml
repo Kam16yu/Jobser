@@ -8,8 +8,15 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  data:
+    path: ../data
+  remote:
+    path: ../remote
+  jobser:
+    path: ..
   flutter:
     sdk: flutter
+  injector: ^2.0.0
 
 dev_dependencies:
   flutter_test:
