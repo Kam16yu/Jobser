@@ -2,7 +2,7 @@ import 'package:domain/domain.dart';
 
 class AppManagement{
 
-  VacanciesRepository repo;
+  SourcesRepository repo;
   // Constructor with injector magic
   AppManagement(this.repo);
 
@@ -21,20 +21,35 @@ class AppManagement{
     return response;
   }
 
-  addCompany(String request, CompanyLocalModel company) async {
+  Future<void> addCompany(CompanyLocalModel company) async {
     int response = await repo.addCompany(company);
   }
 
-  addJob(JobLocalModel job) async {
+  Future<void> addJob(JobLocalModel job) async {
     int response = await repo.addJob(job);
   }
 
-  deleteCompany(int localId, int remoteId) async {
+  Future<void> deleteCompany(int localId, int remoteId) async {
     int response = await repo.deleteCompany(localId, remoteId);
   }
 
-  deleteJob(int localId, int remoteId) async {
+  Future<void> deleteJob(int localId, int remoteId) async {
     int response = await repo.deleteJob(localId, remoteId);
   }
 
+  List<CompanyLocalModel> getSavedCompanies(){
+    return repo.getSavedCompanies();
+  }
+
+  List<JobLocalModel> getSavedCompanyJobs(int remoteId){
+    return repo.getSavedCompanyJobs(remoteId);
+  }
+
+  List<JobLocalModel> getSavedJobs(){
+    return repo.getSavedJobs();
+  }
+
+  Future<bool> internetConnection () {
+    return repo.internetCheck();
+  }
 }

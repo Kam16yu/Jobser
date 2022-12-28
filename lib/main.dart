@@ -40,15 +40,9 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Jobs'),
-      ),
-      //Implementing Bloc in app
-      body: BlocProvider(
+    return BlocProvider(
         create: (context) => Injector.appInstance.get<MainBloc>(),
         child: const JobsPage(),
-      ),
-    );
+      );
   }
 }

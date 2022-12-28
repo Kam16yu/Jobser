@@ -1,5 +1,5 @@
 import 'package:data/core/sources_operations.dart';
-import 'package:domain/repository/vacancies_repository.dart';
+import 'package:domain/repository/sources_repository.dart';
 import 'package:domain/use_cases/app_management.dart';
 import 'package:injector/injector.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
@@ -21,13 +21,13 @@ class InstancesInject {
       ..registerSingleton<RestClient>(
         () => RestClient(),
       )
-      ..registerSingleton<VacanciesRepository>(
+      ..registerSingleton<SourcesRepository>(
         () => DbAndRemoteOperations(
           Injector.appInstance.get<RestClient>(),
         ),
       )
       ..registerSingleton<AppManagement>(
-        () => AppManagement(Injector.appInstance.get<VacanciesRepository>()),
+        () => AppManagement(Injector.appInstance.get<SourcesRepository>()),
       )
       ..registerSingleton<MainBloc>(
         () => MainBloc(

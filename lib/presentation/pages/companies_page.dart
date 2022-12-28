@@ -4,25 +4,23 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
 import 'package:jobser/presentation/bloc/states.dart';
+import 'package:jobser/presentation/pages/add_company.dart';
+import 'package:jobser/presentation/pages/company.dart';
 
 class Companies extends StatefulWidget {
-  const Companies({super.key});
+  const Companies({super.key, required this.companiesList});
+
+  final List<CompanyLocalModel> companiesList;
 
   @override
   State<Companies> createState() => _CompaniesState();
 }
 
 class _CompaniesState extends State<Companies> {
-  List<CompanyLocalModel> companiesList = [];
-
-  @override
-  void initState() {
-    super.initState();
-    BlocProvider.of<MainBloc>(context).add(GetCompaniesEvent());
-  }
 
   @override
   Widget build(BuildContext context) {
+    List<CompanyLocalModel> companiesList = widget.companiesList;
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
     return Scaffold(
       appBar: AppBar(
@@ -50,7 +48,7 @@ class _CompaniesState extends State<Companies> {
                           color: Theme.of(context).colorScheme.outline,
                         ),
                         borderRadius:
-                            const BorderRadius.all(Radius.circular(12)),
+                            const BorderRadius.all(Radius.circular(4)),
                       ),
                       child: InkWell(
                         splashColor: Colors.blue.withAlpha(30),
@@ -60,7 +58,7 @@ class _CompaniesState extends State<Companies> {
                               builder: (BuildContext context) =>
                                   BlocProvider.value(
                                 value: mainBloc,
-                                child: const Companies(),
+                                child: CompanyPage(companyModel: company,),
                               ),
                             ),
                           );
@@ -75,35 +73,18 @@ class _CompaniesState extends State<Companies> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    ' ID: ${company.companyID}',
+                                    'ID: ${company.companyID}',
                                   ),
                                   Text(
-                                    ' Name: ${company.name},',
+                                    'Name: ${company.name},',
                                   ),
                                   Text(
-                                    ' Description: ${company.description}',
+                                    'Description: ${company.description}',
                                     softWrap: true,
                                   ),
-                                  Text(' Industry: ${company.industry}'),
+                                  Text('Industry: ${company.industry}'),
                                 ],
                               ),
-                            ),
-                            IconButton(
-                              padding: const EdgeInsets.fromLTRB(
-                                8.0,
-                                8.0,
-                                20.0,
-                                8.0,
-                              ),
-                              icon: const Icon(Icons.delete),
-                              onPressed: () async {
-                                mainBloc.add(
-                                  DeleteCompanyEvent(
-                                    company.companyLocalID,
-                                    company.companyID,
-                                  ),
-                                );
-                              },
                             ),
                           ],
                         ),
@@ -115,6 +96,45 @@ class _CompaniesState extends State<Companies> {
             },
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        color: Colors.white38,
+        elevation: 10,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                IconButton(
+                  padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
+                  icon: const Icon(Icons.restart_alt_rounded),
+                  iconSize: 40.0,
+                  onPressed: () {
+                    mainBloc.add(GetCompaniesEvent());
+                  },
+                  tooltip: 'Update jobs',
+                ),
+              ],
+            ),
+            IconButton(
+              padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 2.0),
+              icon: const Icon(Icons.add_box_rounded),
+              iconSize: 40.0,
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        BlocProvider.value(
+                          value: mainBloc,
+                          child: const AddCompanyPage(),
+                        ),
+                  ),
+                );
+              },
+              tooltip: 'Add Job',
+            ),
+          ],
+        ),
       ),
     );
   }

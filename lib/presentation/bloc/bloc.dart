@@ -6,13 +6,12 @@ import 'package:jobser/presentation/bloc/events.dart';
 import 'package:jobser/presentation/bloc/states.dart';
 
 class MainBloc extends Bloc<ListEvent, ListState> {
-  AppManagement appManagement;
-
-  MainBloc(this.appManagement) : super(ListInitState()) {
+  final AppManagement _appManagement;
+  MainBloc(this._appManagement) : super(ListInitState()) {
     on<GetJobsEvent>(getJobsEvent);
-    on<AddJobEvent>(postJobEvent);
+    on<AddJobEvent>(addJobEvent);
     on<GetCompaniesEvent>(getCompaniesEvent);
-    on<AddCompanyEvent>(postCompaniesEvent);
+    on<AddCompanyEvent>(addCompanysEvent);
     on<GetCompaniesJobsEvent>(getCompaniesJobsEvent);
     on<DeleteCompanyEvent>(deleteCompanyEvent);
     on<DeleteJobEvent>(deleteJobEvent);
@@ -22,30 +21,36 @@ class MainBloc extends Bloc<ListEvent, ListState> {
     GetJobsEvent event,
     Emitter<ListState> emitter,
   ) async {
-    final List<JobLocalModel> result = await appManagement.getJobs();
-    emitter(UpdateJobsState(result));
+    final List<JobLocalModel> jobsResult = await _appManagement.getJobs();
+    final List<CompanyLocalModel> companiesList =
+    await _appManagement.getCompanies();
+    emitter(UpdateJobsState(jobsResult, companiesList));
   }
 
   Future<void> getCompaniesEvent(
     GetCompaniesEvent event,
     Emitter<ListState> emitter,
   ) async {
-    final List<CompanyLocalModel> result = await appManagement.getCompanies();
+    final List<CompanyLocalModel> result = await _appManagement.getCompanies();
     emitter(UpdateCompaniesState(result));
   }
 
-  Future<void> postJobEvent(
+  Future<void> addJobEvent(
     AddJobEvent event,
     Emitter<ListState> emitter,
   ) async {
-    emitter(UpdateJobsState([]));
+    await _appManagement.addJob(event.job);
+    final List<JobLocalModel> jobsResult = _appManagement.getSavedJobs();
+    final List<CompanyLocalModel> companiesList = _appManagement.getSavedCompanies();
+    emitter(UpdateJobsState(jobsResult, companiesList));
   }
 
-  Future<void> postCompaniesEvent(
+  Future<void> addCompanysEvent(
     AddCompanyEvent event,
     Emitter<ListState> emitter,
   ) async {
-    emitter(UpdateCompaniesState([]));
+    await _appManagement.addCompany(event.company);
+    // emitter(UpdateCompaniesState([]));
   }
 
   Future<void> getCompaniesJobsEvent(
@@ -53,25 +58,27 @@ class MainBloc extends Bloc<ListEvent, ListState> {
     Emitter<ListState> emitter,
   ) async {
     final List<JobLocalModel> result =
-        await appManagement.getCompanyJobs(event.remoteId);
+        await _appManagement.getCompanyJobs(event.remoteId);
     emitter(UpdateCompaniesJobState(result));
   }
 
-  Future<void>deleteCompanyEvent (
-      DeleteCompanyEvent event,
-      Emitter<ListState> emitter,
-      ) async{
-    await appManagement.deleteCompany(event.localId, event.remoteId);
-    final List<CompanyLocalModel> result = await appManagement.getCompanies();
+  Future<void> deleteCompanyEvent(
+    DeleteCompanyEvent event,
+    Emitter<ListState> emitter,
+  ) async {
+    await _appManagement.deleteCompany(event.localId, event.remoteId);
+    final List<CompanyLocalModel> result = await _appManagement.getCompanies();
     emitter(UpdateCompaniesState(result));
   }
 
-  Future<void>deleteJobEvent (
-      DeleteJobEvent event,
-      Emitter<ListState> emitter,
-      ) async{
-    await appManagement.deleteJob(event.localId, event.remoteId);
-    final List<JobLocalModel> result = await appManagement.getJobs();
-    emitter(UpdateJobsState(result));
+  Future<void> deleteJobEvent(
+    DeleteJobEvent event,
+    Emitter<ListState> emitter,
+  ) async {
+    await _appManagement.deleteJob(event.localId, event.remoteId);
+    final List<JobLocalModel> jobsResult = await _appManagement.getJobs();
+    final List<CompanyLocalModel> companiesList =
+        await _appManagement.getCompanies();
+    emitter(UpdateJobsState(jobsResult, companiesList));
   }
 }

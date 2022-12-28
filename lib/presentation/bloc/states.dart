@@ -7,8 +7,8 @@ class ListInitState extends ListState {}
 
 class UpdateJobsState implements ListState {
   final List<JobLocalModel> jobs;
-
-  UpdateJobsState(this.jobs);
+  final List<CompanyLocalModel> companies;
+  UpdateJobsState(this.jobs, this.companies);
 }
 
 class UpdateCompaniesState implements ListState {
