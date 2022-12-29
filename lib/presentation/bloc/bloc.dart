@@ -11,7 +11,7 @@ class MainBloc extends Bloc<ListEvent, ListState> {
     on<GetJobsCompaniesEvent>(getJobsCompaniesEvent);
     on<AddJobEvent>(addJobEvent);
     on<GetCompaniesEvent>(getCompaniesEvent);
-    on<AddCompanyEvent>(addCompanysEvent);
+    on<AddCompanyEvent>(addCompanyEvent);
     on<GetCompaniesJobsEvent>(getCompaniesJobsEvent);
     on<DeleteCompanyEvent>(deleteCompanyEvent);
     on<DeleteJobEvent>(deleteJobEvent);
@@ -45,7 +45,7 @@ class MainBloc extends Bloc<ListEvent, ListState> {
     emitter(UpdateJobsCompaniesState(jobsResult, companiesList));
   }
 
-  Future<void> addCompanysEvent(
+  Future<void> addCompanyEvent(
     AddCompanyEvent event,
     Emitter<ListState> emitter,
   ) async {

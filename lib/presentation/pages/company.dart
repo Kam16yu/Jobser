@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
+import 'package:jobser/presentation/pages/companies_page.dart';
 
 class CompanyPage extends StatefulWidget {
   const CompanyPage({super.key, required this.companyModel});
@@ -76,6 +77,15 @@ class _CompanyPageState extends State<CompanyPage> {
                   DeleteCompanyEvent(
                     company.companyLocalID,
                     company.companyID,
+                  ),
+                );
+                mainBloc.add(GetCompaniesEvent());
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => BlocProvider.value(
+                      value: mainBloc,
+                      child: const CompaniesPage(),
+                    ),
                   ),
                 );
               },

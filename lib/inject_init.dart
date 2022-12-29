@@ -16,7 +16,7 @@ class InstancesInject {
   static final InstancesInject _instance = InstancesInject._internal();
 
   //C
-  Future<void> setup() async {
+  void setup() {
     Injector.appInstance
       ..registerSingleton<RestClient>(
         () => RestClient(),

@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
-
-import 'companies_page.dart';
+import 'package:jobser/presentation/pages/companies_page.dart';
 
 class AddCompanyPage extends StatefulWidget {
   const AddCompanyPage({super.key});
@@ -51,7 +50,7 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
                 MaterialPageRoute(
                   builder: (BuildContext context) => BlocProvider.value(
                     value: mainBloc,
-                    child: const Companies(),
+                    child: const CompaniesPage(),
                   ),
                 ),
               );

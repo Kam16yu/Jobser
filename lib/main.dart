@@ -10,7 +10,7 @@ void main() async {
   // Ensure that plugin services are initialized
   WidgetsFlutterBinding.ensureInitialized();
   await initDataLayer();
-  await InstancesInject().setup();
+  InstancesInject().setup();
   runApp(const MyApp());
 }
 

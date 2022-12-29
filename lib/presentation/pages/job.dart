@@ -4,17 +4,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
 
+import 'jobs_page.dart';
+
 class JobPage extends StatefulWidget {
   const JobPage({super.key, required this.jobModel, required this.companyName});
 
   final JobLocalModel jobModel;
   final String companyName;
+
   @override
   State<JobPage> createState() => _JobPageState();
 }
 
 class _JobPageState extends State<JobPage> {
-
   @override
   Widget build(BuildContext context) {
     final JobLocalModel job = widget.jobModel;
@@ -41,15 +43,22 @@ class _JobPageState extends State<JobPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(style: const TextStyle(fontSize: 20),
-                      ' ${job.title}',),
-                  Text(style: const TextStyle(fontSize: 20),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    ' ${job.title}',
+                  ),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
                     ' Company: ${widget.companyName}',
                   ),
-                  Text(style: const TextStyle(fontSize: 20),
-                      ' Description: ${job.description}',),
-                  Text(style: const TextStyle(fontSize: 20),
-                      ' City: ${job.city}',),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    ' Description: ${job.description}',
+                  ),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    ' City: ${job.city}',
+                  ),
                 ],
               ),
             ),
@@ -75,6 +84,15 @@ class _JobPageState extends State<JobPage> {
                   DeleteJobEvent(
                     job.jobLocalID,
                     job.jobID,
+                  ),
+                );
+                mainBloc.add(GetJobsCompaniesEvent());
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder: (BuildContext context) => BlocProvider.value(
+                      value: mainBloc,
+                      child: const JobsPage(),
+                    ),
                   ),
                 );
               },

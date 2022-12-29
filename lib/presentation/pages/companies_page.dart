@@ -7,16 +7,16 @@ import 'package:jobser/presentation/bloc/states.dart';
 import 'package:jobser/presentation/pages/add_company.dart';
 import 'package:jobser/presentation/pages/company.dart';
 
-class Companies extends StatefulWidget {
-  const Companies({super.key, this.companiesList});
+class CompaniesPage extends StatefulWidget {
+  const CompaniesPage({super.key, this.companiesList});
 
   final List<CompanyLocalModel>? companiesList;
 
   @override
-  State<Companies> createState() => _CompaniesState();
+  State<CompaniesPage> createState() => _CompaniesPageState();
 }
 
-class _CompaniesState extends State<Companies> {
+class _CompaniesPageState extends State<CompaniesPage> {
   List<CompanyLocalModel> companiesList = [];
   @override
   Widget build(BuildContext context) {

@@ -48,7 +48,7 @@ class _JobsPageState extends State<JobsPage> {
                   builder: (BuildContext context) =>
                       BlocProvider.value(
                         value: mainBloc,
-                        child: Companies(companiesList: companiesList),
+                        child: CompaniesPage(companiesList: companiesList),
                       ),
                 ),
               );

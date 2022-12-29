@@ -9,7 +9,17 @@ class ResponseMapper {
     final List<JobRemoteModel> jobsData = [];
     if (json['result'] != null) {
       json['result'].forEach((mapInList) {
-        jobsData.add(JobRemoteModel.fromMap(mapInList));
+        Map<String, dynamic> map = mapInList;
+        if (map['title'] == null) {
+          map['title'] = '';
+        }
+        if (map['description'] == null) {
+          map['description'] = '';
+        }
+        if (map['city'] == null) {
+          map['city'] = '';
+        }
+        jobsData.add(JobRemoteModel.fromMap(map));
       });
     }
     return jobsData;
@@ -27,7 +37,17 @@ class ResponseMapper {
     final List<CompanyRemoteModel> companiesData = [];
     if (json['result'] != null) {
       json['result'].forEach((mapInList) {
-        companiesData.add(CompanyRemoteModel.fromMap(mapInList));
+        Map<String, dynamic> map = mapInList;
+        if (map['name'] == null) {
+          map['name'] = '';
+        }
+        if (map['description'] == null) {
+          map['description'] = '';
+        }
+        if (map['industry'] == null) {
+          map['industry'] = '';
+        }
+        companiesData.add(CompanyRemoteModel.fromMap(map));
       });
     }
     return companiesData;
