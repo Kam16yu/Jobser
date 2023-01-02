@@ -174,7 +174,6 @@ class _AddJobPageState extends State<AddJobPage> {
   }
 
   String getDropListValue(List<CompanyLocalModel> companiesList, int id) {
-    print('get $id');
     final Iterable<CompanyLocalModel> companies =
         companiesList.where((e) => e.companyID == id);
     if (companies.isNotEmpty) {

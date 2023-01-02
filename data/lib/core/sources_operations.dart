@@ -59,7 +59,7 @@ class DbAndRemoteOperations implements SourcesRepository {
     }
     //Add company, to remote layer, int id 1..2..  - ok, -1 - failed
     final result = await client.addCompany(company);
-    //if is in DB and only local
+    //if company is in DB and only local
     if (company.companyID == -1) {
       //if request failed
       if (result == -1) {
@@ -118,7 +118,7 @@ class DbAndRemoteOperations implements SourcesRepository {
     }
     //Add job, to remote layer,int id 1..2..  - ok, -1 - failed
     final result = await client.addJob(job);
-    //if is in DB and only local
+    //if job is in DB and only local
     if (job.jobID == -1) {
       //if request failed
       if (result == -1) {

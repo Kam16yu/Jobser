@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:jobser/presentation/bloc/bloc.dart';
 import 'package:jobser/presentation/bloc/events.dart';
-
-import 'jobs_page.dart';
+import 'package:jobser/presentation/pages/jobs_page.dart';
 
 class JobPage extends StatefulWidget {
   const JobPage({super.key, required this.jobModel, required this.companyName});

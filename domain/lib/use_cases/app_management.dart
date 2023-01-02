@@ -24,20 +24,20 @@ class AppManagement {
     return response;
   }
 
-  Future<void> addCompany(CompanyLocalModel company) async {
-    int response = await repo.addCompany(company);
+  Future<int> addCompany(CompanyLocalModel company) async {
+    return await repo.addCompany(company);
   }
 
-  Future<void> addJob(JobLocalModel job) async {
-    int response = await repo.addJob(job);
+  Future<int> addJob(JobLocalModel job) async {
+    return await repo.addJob(job);
   }
 
-  Future<void> deleteCompany(int localId, int remoteId) async {
-    int response = await repo.deleteCompany(localId, remoteId);
+  Future<int> deleteCompany(int localId, int remoteId) async {
+    return await repo.deleteCompany(localId, remoteId);
   }
 
-  Future<void> deleteJob(int localId, int remoteId) async {
-    int response = await repo.deleteJob(localId, remoteId);
+  Future<int> deleteJob(int localId, int remoteId) async {
+    return await repo.deleteJob(localId, remoteId);
   }
 
   List<CompanyLocalModel> getSavedCompanies() {
