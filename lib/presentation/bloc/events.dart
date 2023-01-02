@@ -15,27 +15,30 @@ class AddJobEvent extends ListEvent {
   AddJobEvent(this.job);
 }
 
-class GetCompaniesEvent extends ListEvent {
-}
+class GetCompaniesEvent extends ListEvent {}
 
 class AddCompanyEvent extends ListEvent {
   final CompanyLocalModel company;
+
   AddCompanyEvent(this.company);
 }
 
 class GetCompaniesJobsEvent extends ListEvent {
   final int remoteId;
+
   GetCompaniesJobsEvent(this.remoteId);
 }
 
 class DeleteCompanyEvent extends ListEvent {
-  final  int localId;
-  final  int remoteId;
+  final int localId;
+  final int remoteId;
+
   DeleteCompanyEvent(this.localId, this.remoteId);
 }
 
 class DeleteJobEvent extends ListEvent {
-  final  int localId;
-  final  int remoteId;
+  final int localId;
+  final int remoteId;
+
   DeleteJobEvent(this.localId, this.remoteId);
 }

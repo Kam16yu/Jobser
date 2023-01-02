@@ -33,7 +33,7 @@ void main() {
     companyID = result;
     simpleJob.companyID = companyID;
     simpleCompany.companyID = companyID;
-    expect(result!=-1, true);
+    expect(result != -1, true);
   });
 
   test('Get companies', () async {
@@ -45,7 +45,7 @@ void main() {
     final result = await client.addJob(simpleJob);
     jobID = result;
     simpleJob.jobID = jobID;
-    expect(result!=-1, true);
+    expect(result != -1, true);
   });
 
   test('Get company jobs', () async {
@@ -55,11 +55,11 @@ void main() {
 
   test('Delete job', () async {
     final result = await client.deleteJob(jobID);
-    expect(result!=-1, true);
+    expect(result != -1, true);
   });
 
   test('Delete company', () async {
     final result = await client.deleteCompany(companyID);
-    expect(result!=-1, true);
+    expect(result != -1, true);
   });
 }

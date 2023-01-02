@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 
-Future<bool> internetStatusCheck () async {
+Future<bool> internetStatusCheck() async {
   bool isOnline = false;
   try {
     final result = await InternetAddress.lookup('example.com');

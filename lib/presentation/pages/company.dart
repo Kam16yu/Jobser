@@ -15,7 +15,6 @@ class CompanyPage extends StatefulWidget {
 }
 
 class _CompanyPageState extends State<CompanyPage> {
-
   @override
   void initState() {
     super.initState();
@@ -46,12 +45,18 @@ class _CompanyPageState extends State<CompanyPage> {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(style: const TextStyle(fontSize: 20),
-                    company.name,),
-                  Text(style: const TextStyle(fontSize: 20),
-                    'Description: ${company.description}',),
-                  Text(style: const TextStyle(fontSize: 20),
-                    'Industry: ${company.industry}',),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    company.name,
+                  ),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    'Description: ${company.description}',
+                  ),
+                  Text(
+                    style: const TextStyle(fontSize: 20),
+                    'Industry: ${company.industry}',
+                  ),
                 ],
               ),
             ),

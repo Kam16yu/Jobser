@@ -18,6 +18,7 @@ class CompaniesPage extends StatefulWidget {
 
 class _CompaniesPageState extends State<CompaniesPage> {
   List<CompanyLocalModel> companiesList = [];
+
   @override
   Widget build(BuildContext context) {
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
@@ -26,6 +27,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
     } else {
       companiesList = mainBloc.appManagement.getSavedCompanies();
     }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Companies'),
@@ -42,6 +44,7 @@ class _CompaniesPageState extends State<CompaniesPage> {
               }
             },
             builder: (context, state) {
+
               return Expanded(
                 child: ListView.builder(
                   itemCount: companiesList.length,
@@ -65,7 +68,9 @@ class _CompaniesPageState extends State<CompaniesPage> {
                               builder: (BuildContext context) =>
                                   BlocProvider.value(
                                 value: mainBloc,
-                                child: CompanyPage(companyModel: company,),
+                                child: CompanyPage(
+                                  companyModel: company,
+                                ),
                               ),
                             ),
                           );
@@ -127,11 +132,10 @@ class _CompaniesPageState extends State<CompaniesPage> {
               onPressed: () {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (BuildContext context) =>
-                        BlocProvider.value(
-                          value: mainBloc,
-                          child: const AddCompanyPage(),
-                        ),
+                    builder: (BuildContext context) => BlocProvider.value(
+                      value: mainBloc,
+                      child: const AddCompanyPage(),
+                    ),
                   ),
                 );
               },

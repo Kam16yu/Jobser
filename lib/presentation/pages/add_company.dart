@@ -8,7 +8,6 @@ import 'package:jobser/presentation/pages/companies_page.dart';
 class AddCompanyPage extends StatefulWidget {
   const AddCompanyPage({super.key});
 
-
   @override
   State<AddCompanyPage> createState() => _AddCompanyPageState();
 }
@@ -17,9 +16,11 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
   String name = '';
   String description = '';
   String industry = '';
+
   @override
   Widget build(BuildContext context) {
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Company'),
@@ -38,11 +39,12 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
               mainBloc.add(
                 AddCompanyEvent(
                   CompanyLocalModel(
-                      companyLocalID: 0,
-                      companyID: 0,
-                      name: name,
-                      description: description,
-                      industry: industry,),
+                    companyLocalID: 0,
+                    companyID: 0,
+                    name: name,
+                    description: description,
+                    industry: industry,
+                  ),
                 ),
               );
               mainBloc.add(GetCompaniesEvent());

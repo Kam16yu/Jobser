@@ -1,4 +1,3 @@
-
 import 'package:domain/models/company_local_model.dart';
 import 'package:hive_flutter/adapters.dart';
 
@@ -46,7 +45,7 @@ class CompanyLocalModelAdapter extends TypeAdapter<CompanyLocalModel> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-          other is CompanyLocalModelAdapter &&
-              runtimeType == other.runtimeType &&
-              typeId == other.typeId;
+      other is CompanyLocalModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
 }

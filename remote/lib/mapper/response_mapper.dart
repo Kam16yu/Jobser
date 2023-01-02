@@ -4,7 +4,6 @@ import 'package:remote/models/company_model.dart';
 import 'package:remote/models/job_model.dart';
 
 class ResponseMapper {
-
   static List<JobRemoteModel> jobsFromJson(Map<String, dynamic> json) {
     final List<JobRemoteModel> jobsData = [];
     if (json['result'] != null) {
@@ -22,6 +21,7 @@ class ResponseMapper {
         jobsData.add(JobRemoteModel.fromMap(map));
       });
     }
+
     return jobsData;
   }
 
@@ -30,6 +30,7 @@ class ResponseMapper {
     jobJson['description'] = job.description;
     jobJson['city'] = job.city;
     jobJson['companyId'] = job.companyID;
+
     return jobJson;
   }
 
@@ -50,13 +51,15 @@ class ResponseMapper {
         companiesData.add(CompanyRemoteModel.fromMap(map));
       });
     }
+
     return companiesData;
   }
 
   static Map<String, dynamic> companyToJson(CompanyLocalModel company) {
-    final Map<String, dynamic> companyJson = {'name' : company.name};
+    final Map<String, dynamic> companyJson = {'name': company.name};
     companyJson['description'] = company.description;
     companyJson['industry'] = company.industry;
+
     return companyJson;
   }
 
@@ -65,6 +68,7 @@ class ResponseMapper {
     if (json['id'] != null) {
       id = json['id'];
     }
+
     return id;
   }
 }

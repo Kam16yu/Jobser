@@ -20,9 +20,9 @@ class CompanyRemoteModel {
         industry = map["industry"] as String;
 
   Map<String, dynamic> toMap() => {
-    "companyID": companyRemoteID,
-    "name": name,
-    "description": description,
-    "industry": industry,
-  };
+        "companyID": companyRemoteID,
+        "name": name,
+        "description": description,
+        "industry": industry,
+      };
 }

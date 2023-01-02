@@ -8,6 +8,7 @@ import 'package:domain/repository/sources_repository.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:remote/models/company_model.dart';
 import 'package:remote/models/job_model.dart';
+
 import '../sensors/internet_status_check.dart';
 import '../source/remote.dart';
 
@@ -39,6 +40,7 @@ class DbAndRemoteOperations implements SourcesRepository {
         jobList.add(remoteJobToLocal(job, jobBox));
       }
       jobBox.addAll(jobList);
+
       return jobList;
     }
 
@@ -61,6 +63,7 @@ class DbAndRemoteOperations implements SourcesRepository {
     if (company.companyID == -1) {
       //if request failed
       if (result == -1) {
+
         return -1;
       }
       // Update company remote status
@@ -119,6 +122,7 @@ class DbAndRemoteOperations implements SourcesRepository {
     if (job.jobID == -1) {
       //if request failed
       if (result == -1) {
+
         return -1;
       }
       // Update Job remote status
@@ -141,6 +145,7 @@ class DbAndRemoteOperations implements SourcesRepository {
 
     return result;
   }
+
   ///Get Company jobs,List<JobLocalModel> - ok, [] - failed
   @override
   Future<List<JobLocalModel>> getCompanyJobs(int companyRemoteID) async {
@@ -157,6 +162,7 @@ class DbAndRemoteOperations implements SourcesRepository {
 
     return jobBox.values.where((e) => e.companyID == companyRemoteID).toList();
   }
+
   ///Delete job,int id 1..2..  - ok, -1 - failed
   @override
   Future<int> deleteJob(int localId, int remoteId) async {
@@ -175,6 +181,7 @@ class DbAndRemoteOperations implements SourcesRepository {
 
     return result;
   }
+
   ///Delete company, from remote layer int id 1..2..  - ok, -1 - failed
   @override
   Future<int> deleteCompany(int localId, int remoteId) async {
@@ -193,24 +200,32 @@ class DbAndRemoteOperations implements SourcesRepository {
 
     return result;
   }
+
   /// Get companies from local DB
   @override
   List<CompanyLocalModel> getSavedCompanies() {
+
     return companiesBox.values.toList();
   }
+
   /// Get company jobs from local DB
   @override
   List<JobLocalModel> getSavedCompanyJobs(int remoteId) {
+
     return jobBox.values.where((e) => e.companyID == remoteId).toList();
   }
+
   /// Get jobs from local DB
   @override
   List<JobLocalModel> getSavedJobs() {
+
     return jobBox.values.toList();
   }
+
   ///Test internet connection
   @override
   Future<bool> internetCheck() {
+
     return internetStatusCheck();
   }
 }

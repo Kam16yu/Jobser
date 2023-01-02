@@ -29,6 +29,7 @@ class _AddJobPageState extends State<AddJobPage> {
     if (companiesList.isNotEmpty && companyRemoteId == -1) {
       companyRemoteId = companiesList.first.companyID;
     }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('New Vacancy'),

@@ -1,4 +1,3 @@
-
 import 'package:domain/models/job_local_model.dart';
 import 'package:hive_flutter/adapters.dart';
 

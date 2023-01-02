@@ -35,6 +35,7 @@ class JobLocalModel {
 
   @override
   String toString() {
+
     return 'Job: id: $jobID, company: $companyID, title: $title, description: '
         '$description, city: $city';
   }

@@ -29,6 +29,7 @@ class _JobsPageState extends State<JobsPage> {
   @override
   Widget build(BuildContext context) {
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Jobs'),
@@ -45,11 +46,10 @@ class _JobsPageState extends State<JobsPage> {
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context) =>
-                      BlocProvider.value(
-                        value: mainBloc,
-                        child: CompaniesPage(companiesList: companiesList),
-                      ),
+                  builder: (BuildContext context) => BlocProvider.value(
+                    value: mainBloc,
+                    child: CompaniesPage(companiesList: companiesList),
+                  ),
                 ),
               );
             },
@@ -79,6 +79,7 @@ class _JobsPageState extends State<JobsPage> {
                     if (companies.isNotEmpty) {
                       companyName = companies.first.name;
                     }
+
                     return InkWell(
                       splashColor: Colors.blue.withAlpha(30),
                       onTap: () {
@@ -86,12 +87,12 @@ class _JobsPageState extends State<JobsPage> {
                           MaterialPageRoute(
                             builder: (BuildContext context) =>
                                 BlocProvider.value(
-                                  value: mainBloc,
-                                  child: JobPage(
-                                    jobModel: job,
-                                    companyName: companyName,
-                                  ),
-                                ),
+                              value: mainBloc,
+                              child: JobPage(
+                                jobModel: job,
+                                companyName: companyName,
+                              ),
+                            ),
                           ),
                         );
                       },
@@ -100,13 +101,10 @@ class _JobsPageState extends State<JobsPage> {
                         elevation: 5,
                         shape: RoundedRectangleBorder(
                           side: BorderSide(
-                            color: Theme
-                                .of(context)
-                                .colorScheme
-                                .outline,
+                            color: Theme.of(context).colorScheme.outline,
                           ),
                           borderRadius:
-                          const BorderRadius.all(Radius.circular(4)),
+                              const BorderRadius.all(Radius.circular(4)),
                         ),
                         child: Row(
                           children: [
@@ -159,11 +157,10 @@ class _JobsPageState extends State<JobsPage> {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            BlocProvider.value(
-                              value: mainBloc,
-                              child: AddJobPage(companiesList: companiesList),
-                            ),
+                        builder: (BuildContext context) => BlocProvider.value(
+                          value: mainBloc,
+                          child: AddJobPage(companiesList: companiesList),
+                        ),
                       ),
                     );
                   },

@@ -31,6 +31,7 @@ class JobRemoteModel {
 
   @override
   String toString() {
+
     return 'Job: id: $jobRemoteID, company: $companyRemoteID, title: $title, description: '
         '$description, city: $city';
   }

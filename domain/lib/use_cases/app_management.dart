@@ -1,23 +1,26 @@
 import 'package:domain/domain.dart';
 
-class AppManagement{
-
+class AppManagement {
   SourcesRepository repo;
+
   // Constructor with injector magic
   AppManagement(this.repo);
 
-  Future<List<CompanyLocalModel>>getCompanies() async {
+  Future<List<CompanyLocalModel>> getCompanies() async {
     List<CompanyLocalModel> response = await repo.getCompanies();
+
     return response;
   }
 
-  Future<List<JobLocalModel>>getCompanyJobs(int remoteId) async {
+  Future<List<JobLocalModel>> getCompanyJobs(int remoteId) async {
     List<JobLocalModel> response = await repo.getCompanyJobs(remoteId);
+
     return response;
   }
 
   Future<List<JobLocalModel>> getJobs() async {
     List<JobLocalModel> response = await repo.getJobs();
+
     return response;
   }
 
@@ -37,19 +40,23 @@ class AppManagement{
     int response = await repo.deleteJob(localId, remoteId);
   }
 
-  List<CompanyLocalModel> getSavedCompanies(){
+  List<CompanyLocalModel> getSavedCompanies() {
+
     return repo.getSavedCompanies();
   }
 
-  List<JobLocalModel> getSavedCompanyJobs(int remoteId){
+  List<JobLocalModel> getSavedCompanyJobs(int remoteId) {
+
     return repo.getSavedCompanyJobs(remoteId);
   }
 
-  List<JobLocalModel> getSavedJobs(){
+  List<JobLocalModel> getSavedJobs() {
+
     return repo.getSavedJobs();
   }
 
-  Future<bool> internetConnection () {
+  Future<bool> internetConnection() {
+
     return repo.internetCheck();
   }
 }

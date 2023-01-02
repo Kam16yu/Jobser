@@ -7,6 +7,7 @@ import 'package:jobser/presentation/bloc/states.dart';
 
 class MainBloc extends Bloc<ListEvent, ListState> {
   final AppManagement appManagement;
+
   MainBloc(this.appManagement) : super(ListInitState()) {
     on<GetJobsCompaniesEvent>(getJobsCompaniesEvent);
     on<AddJobEvent>(addJobEvent);
@@ -23,7 +24,7 @@ class MainBloc extends Bloc<ListEvent, ListState> {
   ) async {
     final List<JobLocalModel> jobsList = await appManagement.getJobs();
     final List<CompanyLocalModel> companiesList =
-    await appManagement.getCompanies();
+        await appManagement.getCompanies();
     emitter(UpdateJobsCompaniesState(jobsList, companiesList));
   }
 
@@ -41,7 +42,8 @@ class MainBloc extends Bloc<ListEvent, ListState> {
   ) async {
     await appManagement.addJob(event.job);
     final List<JobLocalModel> jobsResult = appManagement.getSavedJobs();
-    final List<CompanyLocalModel> companiesList = appManagement.getSavedCompanies();
+    final List<CompanyLocalModel> companiesList =
+        appManagement.getSavedCompanies();
     emitter(UpdateJobsCompaniesState(jobsResult, companiesList));
   }
 

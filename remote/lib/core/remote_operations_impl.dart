@@ -1,20 +1,19 @@
+import 'package:data/core/constants.dart';
 import 'package:data/source/remote.dart';
 import 'package:dio/dio.dart';
 import 'package:domain/models/company_local_model.dart';
 import 'package:domain/models/job_local_model.dart';
 import 'package:flutter/foundation.dart';
-import 'package:data/core/constants.dart';
 import 'package:remote/mapper/response_mapper.dart';
 import 'package:remote/models/company_model.dart';
 import 'package:remote/models/job_model.dart';
 
 class RestClient implements RemoteOperations {
-
   final Dio dioInstance = Dio()
     ..interceptors.add(LogInterceptor(
-    responseHeader: false,
-    responseBody: true,
-  ));
+      responseHeader: false,
+      responseBody: true,
+    ));
 
   // Constructor with injector magic
   RestClient();
@@ -25,6 +24,7 @@ class RestClient implements RemoteOperations {
       var response = await dioInstance.get(request);
       if (response.statusCode == 200) {
         List<JobRemoteModel> jobs = ResponseMapper.jobsFromJson(response.data);
+
         return jobs;
       }
     } on DioError catch (e) {
@@ -32,6 +32,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return [];
   }
 
@@ -42,6 +43,7 @@ class RestClient implements RemoteOperations {
           await dioInstance.post(request, data: ResponseMapper.jobToJson(job));
       if (response.statusCode == 200) {
         int jobId = ResponseMapper.idFromJson(response.data);
+
         return jobId;
       }
     } on DioError catch (e) {
@@ -49,6 +51,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return -1;
   }
 
@@ -58,12 +61,14 @@ class RestClient implements RemoteOperations {
       var response = await dioInstance.delete(
           request.replaceFirst('{id}', '$id'),
           options: Options(headers: {'content-type': 'text/plain'}));
+
       return response.statusCode ?? 200;
     } on DioError catch (e) {
       if (kDebugMode) {
         print(e);
       }
     }
+
     return -1;
   }
 
@@ -75,6 +80,7 @@ class RestClient implements RemoteOperations {
       if (response.statusCode == 200) {
         List<CompanyRemoteModel> company =
             ResponseMapper.companiesFromJson(response.data);
+
         return company;
       }
     } on DioError catch (e) {
@@ -82,6 +88,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return [];
   }
 
@@ -93,6 +100,7 @@ class RestClient implements RemoteOperations {
           data: ResponseMapper.companyToJson(company));
       if (response.statusCode == 200) {
         int companyId = ResponseMapper.idFromJson(response.data);
+
         return companyId;
       }
     } on DioError catch (e) {
@@ -100,6 +108,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return -1;
   }
 
@@ -111,6 +120,7 @@ class RestClient implements RemoteOperations {
           await dioInstance.get(request.replaceFirst('{id}', id.toString()));
       if (response.statusCode == 200) {
         List<JobRemoteModel> jobs = ResponseMapper.jobsFromJson(response.data);
+
         return jobs;
       }
     } on DioError catch (e) {
@@ -118,6 +128,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return [];
   }
 
@@ -134,6 +145,7 @@ class RestClient implements RemoteOperations {
         print(e);
       }
     }
+
     return -1;
   }
 }
