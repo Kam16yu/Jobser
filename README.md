@@ -1,4 +1,5 @@
 # Jobser
+[![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 
 Flutter application to view and add vacancies and employer companies. With the implementation of
 Clean Architecture, REST API for communicate with remote server(was used DIO package) and local DB(
