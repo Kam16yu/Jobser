@@ -1,6 +1,6 @@
 name: remote
 description: A Flutter package to contain remote related logic.
-version: 0.0.1
+version: 1.2.4
 publish_to: none
 
 environment:
