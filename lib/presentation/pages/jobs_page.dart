@@ -54,7 +54,7 @@ class _JobsPageState extends State<JobsPage> {
               );
             },
             child: const Text("Companies"),
-          )
+          ),
         ],
       ),
       //Implementing Bloc in app

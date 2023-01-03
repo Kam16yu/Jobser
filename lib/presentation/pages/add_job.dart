@@ -68,7 +68,7 @@ class _AddJobPageState extends State<AddJobPage> {
               );
             },
             child: const Text("Save"),
-          )
+          ),
         ],
       ),
       body: Card(
@@ -178,8 +178,10 @@ class _AddJobPageState extends State<AddJobPage> {
         companiesList.where((e) => e.companyID == id);
     if (companies.isNotEmpty) {
       final CompanyLocalModel company = companies.first;
+
       return '${company.name} ID: ${company.companyID.toString()}';
     }
+
     return '';
   }
 }

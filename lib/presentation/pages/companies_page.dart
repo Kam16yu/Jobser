@@ -22,11 +22,9 @@ class _CompaniesPageState extends State<CompaniesPage> {
   @override
   Widget build(BuildContext context) {
     final MainBloc mainBloc = BlocProvider.of<MainBloc>(context);
-    if (widget.companiesList.runtimeType != Null) {
-      companiesList = widget.companiesList!;
-    } else {
-      companiesList = mainBloc.appManagement.getSavedCompanies();
-    }
+    companiesList = widget.companiesList.runtimeType != Null
+        ? widget.companiesList!
+        : mainBloc.appManagement.getSavedCompanies();
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +42,6 @@ class _CompaniesPageState extends State<CompaniesPage> {
               }
             },
             builder: (context, state) {
-
               return Expanded(
                 child: ListView.builder(
                   itemCount: companiesList.length,

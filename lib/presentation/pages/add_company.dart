@@ -58,7 +58,7 @@ class _AddCompanyPageState extends State<AddCompanyPage> {
               );
             },
             child: const Text("Save"),
-          )
+          ),
         ],
       ),
       body: Card(
