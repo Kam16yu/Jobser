@@ -63,7 +63,6 @@ class DbAndRemoteOperations implements SourcesRepository {
     if (company.companyID == -1) {
       //if request failed
       if (result == -1) {
-
         return -1;
       }
       // Update company remote status
@@ -122,7 +121,6 @@ class DbAndRemoteOperations implements SourcesRepository {
     if (job.jobID == -1) {
       //if request failed
       if (result == -1) {
-
         return -1;
       }
       // Update Job remote status
@@ -204,28 +202,24 @@ class DbAndRemoteOperations implements SourcesRepository {
   /// Get companies from local DB
   @override
   List<CompanyLocalModel> getSavedCompanies() {
-
     return companiesBox.values.toList();
   }
 
   /// Get company jobs from local DB
   @override
   List<JobLocalModel> getSavedCompanyJobs(int remoteId) {
-
     return jobBox.values.where((e) => e.companyID == remoteId).toList();
   }
 
   /// Get jobs from local DB
   @override
   List<JobLocalModel> getSavedJobs() {
-
     return jobBox.values.toList();
   }
 
   ///Test internet connection
   @override
   Future<bool> internetCheck() {
-
     return internetStatusCheck();
   }
 }

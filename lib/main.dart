@@ -20,7 +20,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Jobser',
       theme: ThemeData(
@@ -41,7 +40,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-
     return BlocProvider(
       create: (context) => Injector.appInstance.get<MainBloc>(),
       child: const JobsPage(),

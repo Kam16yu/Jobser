@@ -41,22 +41,18 @@ class AppManagement {
   }
 
   List<CompanyLocalModel> getSavedCompanies() {
-
     return repo.getSavedCompanies();
   }
 
   List<JobLocalModel> getSavedCompanyJobs(int remoteId) {
-
     return repo.getSavedCompanyJobs(remoteId);
   }
 
   List<JobLocalModel> getSavedJobs() {
-
     return repo.getSavedJobs();
   }
 
   Future<bool> internetConnection() {
-
     return repo.internetCheck();
   }
 }
